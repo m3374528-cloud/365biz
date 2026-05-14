@@ -230,11 +230,12 @@ function selType(type){
   // 프로젝트 목록 업데이트
   const sel=document.getElementById('proj-sel');
   sel.innerHTML='<option value="">— 프로젝트 선택 —</option>';
-  const list=type==='safety'?masterData.safetyProjects:masterData.projects;
+  // 현장방문은 3사 전체, 석면유지보수는 안전관리 현장만
+  const list=type==='safety'?masterData.safetyProjects:[...masterData.projects];
   list.forEach(p=>{
     const opt=document.createElement('option');
     opt.value=`${p.biz}|${p.projNum}|${p.projName}`;
-    opt.textContent=`[${p.projNum}] ${p.projName}`;
+    opt.textContent=`[${p.biz} ${p.projNum}] ${p.projName}`;
     sel.appendChild(opt);
   });
   // 석면유지보수 전용 섹션
